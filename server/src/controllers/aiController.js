@@ -36,9 +36,14 @@ Return ONLY valid JSON:
 
     const content = completion.choices[0].message.content;
 
-    res.status(200).json({
-      aiResponse: content,
-    });
+    const cleanedContent = content
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    const resumeData = JSON.parse(cleanedContent);
+
+    res.status(200).json(resumeData);
 
   } catch (error) {
     console.log(error);
