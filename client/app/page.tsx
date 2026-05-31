@@ -53,7 +53,7 @@ const [editProjects, setEditProjects] = useState("");
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtcHBxcXlpaDAwMDBiZmJ3eTJrdmtoZzAiLCJpYXQiOjE3Nzk5ODkwMTgsImV4cCI6MTc4MDU5MzgxOH0.1SJRNBORjGhg62e7f9ceubR8cZNbbbHtAXu5r23NjZ8",
+            authorization: localStorage.getItem("token") || "",
           },
           body: JSON.stringify({
             title: `${jobRole} Resume`,
@@ -87,7 +87,7 @@ const [editProjects, setEditProjects] = useState("");
       "http://localhost:5000/api/resume/my-resumes",
       {
         headers: {
-          authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtcHBxcXlpaDAwMDBiZmJ3eTJrdmtoZzAiLCJpYXQiOjE3Nzk5ODkwMTgsImV4cCI6MTc4MDU5MzgxOH0.1SJRNBORjGhg62e7f9ceubR8cZNbbbHtAXu5r23NjZ8",
+          authorization: localStorage.getItem("token") || "",
         },
       }
     );
@@ -113,7 +113,7 @@ const deleteResume = async (id: string) => {
         method: "DELETE",
         headers: {
           authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtcHBxcXlpaDAwMDBiZmJ3eTJrdmtoZzAiLCJpYXQiOjE3Nzk5ODkwMTgsImV4cCI6MTc4MDU5MzgxOH0.1SJRNBORjGhg62e7f9ceubR8cZNbbbHtAXu5r23NjZ8",
+           localStorage.getItem("token") || "",
         },
       }
     );
@@ -139,7 +139,7 @@ const updateResume = async () => {
         headers: {
           "Content-Type": "application/json",
           authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtcHBxcXlpaDAwMDBiZmJ3eTJrdmtoZzAiLCJpYXQiOjE3Nzk5ODkwMTgsImV4cCI6MTc4MDU5MzgxOH0.1SJRNBORjGhg62e7f9ceubR8cZNbbbHtAXu5r23NjZ8",
+           localStorage.getItem("token") || "",
         },
         body: JSON.stringify({
           title: editingResume.title,

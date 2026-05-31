@@ -1,0 +1,79 @@
+"use client";
+
+import { useState } from "react";
+
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const loginUser = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message);
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+
+      alert("Login Successful");
+
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error);
+      alert("Login Failed");
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+
+      <div className="bg-white p-8 rounded-lg shadow w-[400px]">
+
+        <h1 className="text-3xl font-bold mb-6 text-center text-black">
+          Login
+        </h1>
+
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full border p-3 rounded mb-4 text-black"
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full border p-3 rounded mb-4 text-black"
+        />
+
+        <button
+          onClick={loginUser}
+          className="w-full bg-green-600 text-white py-3 rounded"
+        >
+          Login
+        </button>
+
+      </div>
+
+    </div>
+  );
+}
