@@ -259,8 +259,8 @@ else if (template === "ats") {
 
     setLoading(true);
 
-    const response = await fetch(
-      "https://ai-resume-builder-w42o.onrender.com/api/resume/create",
+   const response = await fetch(
+  "https://ai-resume-builder-w42o.onrender.com/api/ai/generate-resume",
       {
         method: "POST",
         headers: {
