@@ -25,8 +25,10 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="text-2xl font-bold text-navy">RF</div>
-            <div className="text-lg font-bold text-navy hidden sm:block">
+            <div className="text-3xl font-extrabold text-blue-600">
+  RF
+</div>
+            <div className="text-xl font-bold text-slate-900 hidden sm:block">
               {APP_NAME}
             </div>
           </Link>

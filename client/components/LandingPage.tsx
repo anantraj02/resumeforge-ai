@@ -9,43 +9,96 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="px-4 sm:px-6 lg:px-8 py-20 lg:py-32 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h1 className="text-5xl lg:text-6xl font-bold text-navy mb-6 leading-tight">
-              {APP_NAME}
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              {APP_TAGLINE}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/register">
-                <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                  Get Started
-                </Button>
-              </Link>
-              <Link href="/login">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  Login
-                </Button>
-              </Link>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <Card className="w-full max-w-md bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
-              <div className="text-center py-12">
-                <div className="text-6xl mb-4">📄</div>
-                <p className="text-lg font-semibold text-navy mb-2">
-                  Professional Resume
-                </p>
-                <p className="text-gray-600">
-                  AI-powered and ATS-optimized
-                </p>
-              </div>
-            </Card>
-          </div>
+      {/* Hero Section */}
+<section className="max-w-7xl mx-auto px-6 py-20 lg:py-28">
+  <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+    {/* Left Side */}
+    <div>
+      <div className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-4 py-2 text-sm font-medium mb-6">
+        🚀 AI-Powered Resume Builder
+      </div>
+
+      <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6">
+        Build ATS-Optimized Resumes
+        <span className="text-blue-600"> That Get Interviews</span>
+      </h1>
+
+      <p className="text-xl text-gray-600 leading-relaxed mb-8">
+        Create professional resumes with AI assistance,
+        improve ATS scores, and stand out to recruiters.
+        Generate job-ready resumes in minutes.
+      </p>
+
+      <div className="flex flex-wrap gap-4">
+        <Link href="/register">
+          <Button variant="primary" size="lg">
+            Create Resume
+          </Button>
+        </Link>
+
+        <Link href="/login">
+          <Button variant="outline" size="lg">
+            Sign In
+          </Button>
+        </Link>
+      </div>
+
+      <div className="flex flex-wrap gap-6 mt-10 text-sm text-gray-600">
+        <div>✓ ATS Friendly</div>
+        <div>✓ AI Generated</div>
+        <div>✓ PDF Export</div>
+        <div>✓ Secure</div>
+      </div>
+    </div>
+
+    {/* Right Side */}
+    <div>
+      <Card className="p-8 shadow-xl border border-gray-200">
+
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="font-semibold text-lg">
+            Resume Analysis
+          </h3>
+
+          <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+            ATS Score 92%
+          </span>
         </div>
-      </section>
+
+        <div className="space-y-4">
+
+          <div className="flex justify-between">
+            <span>Keywords Optimized</span>
+            <span className="text-green-600">✓</span>
+          </div>
+
+          <div className="flex justify-between">
+            <span>Formatting</span>
+            <span className="text-green-600">✓</span>
+          </div>
+
+          <div className="flex justify-between">
+            <span>Readability</span>
+            <span className="text-green-600">✓</span>
+          </div>
+
+          <div className="flex justify-between">
+            <span>Recruiter Friendly</span>
+            <span className="text-green-600">✓</span>
+          </div>
+
+        </div>
+
+        <div className="mt-8 h-3 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-full w-[92%] bg-green-500"></div>
+        </div>
+
+      </Card>
+    </div>
+
+  </div>
+</section>
 
       {/* Features Section */}
       <section className="bg-gray-50 px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
