@@ -1,12 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import { APP_NAME } from "@/lib/constants";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const loginUser = async () => {
+    setError("");
+    
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+
     try {
       const response = await fetch(
         "https://ai-resume-builder-w42o.onrender.com/api/auth/login",
@@ -25,55 +41,104 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        alert(data.message);
+        setError(data.message || "Login failed");
         return;
       }
 
       localStorage.setItem("token", data.token);
-
-      alert("Login Successful");
-
       window.location.href = "/";
     } catch (error) {
+      setError("An error occurred. Please try again.");
       console.log(error);
-      alert("Login Failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      loginUser();
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center px-4">
+      <Card className="w-full max-w-md" padding="lg">
+        {/* Logo */}
+        <div className="text-center mb-8">
+          <div className="text-4xl font-bold text-navy mb-2">{APP_NAME}</div>
+          <p className="text-gray-600">Welcome back</p>
+        </div>
 
-      <div className="bg-white p-8 rounded-lg shadow w-[400px]">
+        {/* Form */}
+        <div className="space-y-4">
+          <Input
+            label="Email"
+            type="email"
+            placeholder="your@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyPress={handleKeyPress}
+            autoComplete="email"
+            error={error && error.includes("email") ? error : ""}
+          />
 
-        <h1 className="text-3xl font-bold mb-6 text-center text-black">
-          Login
-        </h1>
+          <Input
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyPress={handleKeyPress}
+            autoComplete="current-password"
+            error={error && error.includes("password") ? error : ""}
+          />
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border p-3 rounded mb-4 text-black"
-        />
+          {error && !error.includes("email") && !error.includes("password") && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+              {error}
+            </div>
+          )}
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border p-3 rounded mb-4 text-black"
-        />
+          <Button
+            onClick={loginUser}
+            variant="primary"
+            size="lg"
+            className="w-full"
+            disabled={loading}
+          >
+            {loading ? "Signing in..." : "Sign In"}
+          </Button>
+        </div>
 
-        <button
-          onClick={loginUser}
-          className="w-full bg-green-600 text-white py-3 rounded"
-        >
-          Login
-        </button>
+        {/* Divider */}
+        <div className="my-6 relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-2 bg-white text-gray-500">New to ResumeForge?</span>
+          </div>
+        </div>
 
-      </div>
+        {/* Register Link */}
+        <Link href="/register">
+          <Button
+            variant="outline"
+            size="lg"
+            className="w-full"
+          >
+            Create an Account
+          </Button>
+        </Link>
 
+        {/* Back to Home */}
+        <div className="mt-6 text-center">
+          <Link href="/" className="text-sm text-blue-600 hover:text-blue-700">
+            Back to Home
+          </Link>
+        </div>
+      </Card>
     </div>
   );
 }

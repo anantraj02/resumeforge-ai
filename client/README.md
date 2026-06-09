@@ -1,36 +1,157 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ResumeForge AI - Frontend
+
+Modern, responsive Next.js frontend for ResumeForge AI resume builder.
+
+## Features
+
+- Smart landing page for public users
+- Authentication-aware dashboard for logged-in users
+- AI-powered resume generation with real-time preview
+- ATS score calculation and optimization suggestions
+- PDF export functionality
+- Multiple resume templates
+- Responsive design for mobile, tablet, and desktop
+- Modern SaaS aesthetic
+
+## Tech Stack
+
+- **Next.js 16** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Utility-first CSS framework
+- **jsPDF** - PDF generation
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+  page.tsx              # Landing page / Dashboard (smart routing)
+  layout.tsx            # Root layout with Navbar
+  login/page.tsx        # Login page
+  register/page.tsx     # Register page
+  dashboard/page.tsx    # Dashboard route
+  globals.css           # Global styles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+components/
+  Navbar.tsx            # Sticky navbar with auth-aware routing
+  LandingPage.tsx       # Public landing page
+  Dashboard.tsx         # Resume generator and manager
+  ui/
+    Button.tsx          # Reusable button component
+    Card.tsx            # Reusable card component
+    Input.tsx           # Reusable input component
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+lib/
+  theme.ts              # Design system (colors, spacing, typography)
+  api.ts                # API configuration and endpoints
+  constants.ts          # App-wide constants (features, tech stack, etc.)
+```
 
-## Deploy on Vercel
+## Key Pages
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Landing Page (/)
+- Hero section with tagline and CTA
+- Features showcase (6 cards)
+- How it works (4-step process)
+- Tech stack display
+- CTA section
+- Footer with links
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Dashboard (/dashboard)
+- Resume generator form
+- AI-powered generation with OpenAI
+- Real-time ATS score
+- Resume preview
+- Save/Delete resumes
+- PDF export
+- Responsive sidebar with saved resumes
+
+### Authentication
+- /login - Login page with validation
+- /register - Registration page with password confirmation
+
+## Design System
+
+### Colors
+- **Navy** (#001a33) - Primary dark color
+- **Blue** (#2563eb) - Primary accent
+- **Soft Blue** (#3b82f6) - Secondary accent
+- **Light Gray** (#f3f4f6) - Background
+- **White** (#ffffff) - Content background
+
+### Components
+- `Button` - Primary, secondary, outline variants
+- `Card` - Flexible card component with padding options
+- `Input` - Form input with validation and labels
+
+## API Integration
+
+The frontend communicates with the backend API at:
+`https://ai-resume-builder-w42o.onrender.com/api`
+
+### Endpoints Used
+- `POST /auth/signup` - User registration
+- `POST /auth/login` - User login
+- `POST /resume/create` - Create resume
+- `GET /resume/my-resumes` - Get user's resumes
+- `DELETE /resume/:id` - Delete resume
+- `POST /ai/generate-resume` - Generate resume with AI
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Connect your GitHub repository to Vercel
+2. Vercel automatically detects Next.js and configures build settings
+3. Deploy with a single push to main branch
+
+```bash
+# Or use Vercel CLI
+npm i -g vercel
+vercel
+```
+
+## Environment Variables
+
+No environment variables needed in frontend - API URL is hardcoded.
+
+## Performance Optimizations
+
+- Image optimization with Next.js Image component (if used)
+- Code splitting and lazy loading
+- Responsive images for different device sizes
+- CSS-in-JS for minimal CSS
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## License
+
+MIT
