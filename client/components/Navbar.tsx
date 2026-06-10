@@ -37,21 +37,21 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
   <Link
     href="/"
-    className="text-gray-600 hover:text-blue-600 transition-colors"
+    className="text-gray-600 hover:text-blue-600 transition"
   >
     Home
   </Link>
 
   <Link href="/register">
-    <Button variant="outline" size="sm">
+    <button className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
       Register
-    </Button>
+    </button>
   </Link>
 
   <Link href="/login">
-    <Button variant="primary" size="sm">
+    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
       Login
-    </Button>
+    </button>
   </Link>
 </div>
 

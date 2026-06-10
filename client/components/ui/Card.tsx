@@ -13,14 +13,13 @@ export default function Card({
     <div
       className={`
         bg-white
-        border
-        border-gray-200
-        rounded-xl
-        shadow-sm
+        rounded-2xl
+        border border-slate-200
+        shadow-md
         p-6
         ${
           hoverable
-            ? "hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+            ? "hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             : ""
         }
         ${className}
