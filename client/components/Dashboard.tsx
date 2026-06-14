@@ -70,6 +70,7 @@ export default function Dashboard() {
       );
 
       const data = await response.json();
+      console.log("API Response:", data);
 
       if (!response.ok) {
         setMessage(data.message);
@@ -236,11 +237,131 @@ export default function Dashboard() {
           </p>
         </div>
 
+        <Card className="mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+
+          <h2 className="text-2xl font-bold">
+            Welcome Back 👋
+          </h2>
+
+          <p className="mt-2 text-blue-100">
+            Generate ATS-optimized resumes and land your next job faster.
+          </p>
+
+        </Card>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+          <Card hoverable>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500">
+                  Total Resumes
+                </p>
+
+                <h2 className="text-4xl font-bold text-blue-600 mt-2">
+                  {resumes.length}
+                </h2>
+              </div>
+
+              <div className="text-4xl">
+                📄
+              </div>
+            </div>
+          </Card>
+
+          <Card hoverable>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500">
+                  ATS Score
+                </p>
+
+                <h2 className="text-4xl font-bold text-green-600 mt-2">
+                  {atsScore}%
+                </h2>
+              </div>
+
+              <div className="text-4xl">
+                🎯
+              </div>
+            </div>
+          </Card>
+          <Card hoverable>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-gray-500">
+                  Templates
+                </p>
+
+                <h2 className="text-4xl font-bold text-purple-600 mt-2">
+                  3
+                </h2>
+              </div>
+
+              <div className="text-4xl">
+                🎨
+              </div>
+            </div>
+          </Card>
+
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left Panel - Generator */}
           <div className="lg:col-span-2 space-y-6">
+
+            <Card className="mb-6">
+              <h2 className="text-xl font-bold mb-4">
+                Quick Actions
+              </h2>
+
+              <div className="flex flex-wrap gap-4">
+
+                <Button
+                  className="
+  hover:bg-blue-600
+  hover:text-white
+  hover:scale-105
+  transition-all
+  duration-300
+  hover:-translate-y-1
+  "
+                >
+                  🚀 Generate Resume
+                </Button>
+
+                <Button
+                  className="
+hover:bg-blue-600
+hover:text-white
+hover:scale-105
+transition-all
+duration-300
+hover:-translate-y-1
+"
+                >
+                  📄 My Resumes
+                </Button>
+
+                <Button
+                  className="
+hover:bg-blue-600
+hover:text-white
+hover:scale-105
+transition-all
+duration-300
+hover:-translate-y-1
+"
+                >
+                  ⬇ Download PDF
+                </Button>
+
+              </div>
+            </Card>
+
             {/* Input Card */}
-            <Card padding="lg">
+            <Card >
               <h2 className="text-2xl font-bold text-navy mb-6">
                 Generate Resume
               </h2>
@@ -275,10 +396,20 @@ export default function Dashboard() {
                   onClick={generateResume}
                   variant="primary"
                   size="lg"
-                  className="w-full"
+                  className="
+  w-full
+  shadow-lg
+  hover:shadow-xl
+  hover:scale-[1.02]
+  transition-all
+  duration-300
+  "
                   disabled={loading}
                 >
-                  {loading ? "Generating..." : "Generate with AI"}
+
+                  {loading
+                    ? "⏳ Generating Resume..."
+                    : "🚀 Generate with AI"}
                 </Button>
               </div>
               {message && (
@@ -290,7 +421,7 @@ export default function Dashboard() {
 
             {/* Generated Resume Preview */}
             {summary && (
-              <Card padding="lg">
+              <Card >
                 <h2 className="text-2xl font-bold text-navy mb-6">
                   Generated Resume
                 </h2>
@@ -316,33 +447,45 @@ export default function Dashboard() {
                 {/* Sections */}
                 <div className="space-y-6 mb-6">
                   <div>
-                    <h3 className="text-lg font-semibold text-navy mb-2">
-                      Summary
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed">{summary}</p>
-                  </div>
+                    <div className="border rounded-xl p-8 bg-white shadow-sm mb-8">
 
-                  {experience && (
-                    <div>
-                      <h3 className="text-lg font-semibold text-navy mb-2">
-                        Experience
-                      </h3>
-                      <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+                      <h1 className="text-3xl font-bold text-center mb-2">
+                        {jobRole || "Professional Resume"}
+                      </h1>
+
+                      <p className="text-center text-gray-500 mb-6">
+                        ATS Score: {atsScore}%
+                      </p>
+
+                      <hr className="mb-6" />
+
+                      <h2 className="font-bold text-lg mb-2">
+                        SUMMARY
+                      </h2>
+
+                      <p className="mb-6">
+                        {summary}
+                      </p>
+
+                      <h2 className="font-bold text-lg mb-2">
+                        EXPERIENCE
+                      </h2>
+
+                      <p className="mb-6 whitespace-pre-wrap">
                         {experience}
                       </p>
-                    </div>
-                  )}
 
-                  {projects && (
-                    <div>
-                      <h3 className="text-lg font-semibold text-navy mb-2">
-                        Projects
-                      </h3>
-                      <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+                      <h2 className="font-bold text-lg mb-2">
+                        PROJECTS
+                      </h2>
+
+                      <p className="whitespace-pre-wrap">
                         {projects}
                       </p>
+
                     </div>
-                  )}
+                  
+                  </div>
                 </div>
 
                 {/* ATS Suggestions */}
@@ -385,25 +528,36 @@ export default function Dashboard() {
 
           {/* Right Panel - Saved Resumes */}
           <div>
-            <Card padding="lg">
+            <Card >
               <h2 className="text-2xl font-bold text-navy mb-6">
                 My Resumes
               </h2>
               <div className="space-y-3">
                 {resumes.length === 0 ? (
-                  <p className="text-gray-600 text-center py-8">
-                    No saved resumes yet. Generate and save one!
-                  </p>
+                  <div className="text-center py-10">
+
+                    <div className="text-5xl mb-4">
+                      📄
+                    </div>
+
+                    <h3 className="font-semibold text-lg">
+                      No Resumes Yet
+                    </h3>
+
+                    <p className="text-gray-500 mt-2">
+                      Generate and save your first resume
+                    </p>
+
+                  </div>
                 ) : (
                   resumes.map((resume) => (
                     <div
                       key={resume.id}
                       onClick={() => setSelectedResume(resume)}
-                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
-                        selectedResume?.id === resume.id
-                          ? "border-blue-600 bg-blue-50"
-                          : "border-gray-200 hover:border-gray-300"
-                      }`}
+                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${selectedResume?.id === resume.id
+                        ? "border-blue-600 bg-blue-50"
+                        : "border-gray-200 hover:border-gray-300"
+                        }`}
                     >
                       <h3 className="font-semibold text-navy">{resume.title}</h3>
                       <p className="text-sm text-gray-600 mt-1">

@@ -6,13 +6,18 @@ import { APP_NAME } from "@/lib/constants";
 import Button from "./ui/Button";
 
 export default function Navbar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
+    setIsLoggedIn(!!token);
   }, []);
+
+
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -26,34 +31,58 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="text-3xl font-extrabold text-blue-600">
-  RF
-</div>
+              RF
+            </div>
             <div className="text-xl font-bold text-slate-900 hidden sm:block">
               {APP_NAME}
             </div>
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-4">
-  <Link
-    href="/"
-    className="text-gray-600 hover:text-blue-600 transition"
-  >
-    Home
-  </Link>
+          <div className="flex items-center gap-4">
 
-  <Link href="/register">
-    <button className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
-      Register
-    </button>
-  </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link href="/">Home</Link>
 
-  <Link href="/login">
-    <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-      Login
-    </button>
-  </Link>
-</div>
+                <Link href="/register">
+                  Register
+                </Link>
+
+                <Link href="/login">
+                  Login
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/"
+                  className="
+  text-blue-600
+  font-medium
+  hover:text-blue-700
+  transition-colors
+  "
+                >
+                  Home
+                </Link>
+
+                <button
+  onClick={handleLogout}
+  className="
+    text-red-600
+    font-medium
+    hover:text-red-700
+    transition-colors
+    duration-300
+  "
+>
+  Logout
+</button>
+              </>
+            )}
+
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -79,7 +108,7 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden pb-4 space-y-3">
-            {isAuthenticated ? (
+            {isLoggedIn ? (
               <>
                 <Link
                   href="/dashboard"
