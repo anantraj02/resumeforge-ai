@@ -31,13 +31,6 @@ AI-powered ATS Resume Builder that helps users create professional, ATS-optimize
 - Prisma ORM
 - PostgreSQL
 
-## Screenshots
-
-### Landing Page
-![Landing Page](./screenshots/landing.png)
-
-### Dashboard
-![Dashboard](./screenshots/dashboard.png)
 
 ## Installation
 
